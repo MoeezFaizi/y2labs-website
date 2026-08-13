@@ -56,7 +56,7 @@ function DifferenceCard({ title, body, icon, bg, tone, index, snap }: CardProps)
   const light = tone === "light";
   return (
     <motion.li
-      className={`flex h-[420px] w-[300px] shrink-0 flex-col justify-between border border-grey-200 p-[30px] sm:h-[514px] sm:w-[376px] sm:px-[34px] ${
+      className={`group relative flex h-[420px] w-[300px] shrink-0 flex-col justify-between border border-grey-200 p-[30px] sm:h-[514px] sm:w-[376px] sm:px-[34px] ${
         snap ? "snap-center" : ""
       } ${light ? "text-white" : "text-black"}`}
       style={{ backgroundColor: bg }}
@@ -64,14 +64,22 @@ function DifferenceCard({ title, body, icon, bg, tone, index, snap }: CardProps)
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.35, ease: [0.65, 0, 0.35, 1], delay: index * 0.05 }}
-      whileHover={{ y: -6, transition: { duration: 0.35, ease: [0.65, 0, 0.35, 1] } }}
+      whileHover={{ y: -8, transition: { duration: 0.35, ease: [0.65, 0, 0.35, 1] } }}
     >
+      {/* Hover shadow + icon drift — 350ms ease-in-out, the component
+          family's documented prototype timing (variant 399:2629). */}
+      <div className="pointer-events-none absolute inset-0 opacity-0 shadow-[0_24px_60px_rgba(10,10,40,0.18)] transition-opacity duration-[350ms] ease-in-out group-hover:opacity-100" />
       <div className="flex flex-col gap-[10px]">
         <h3 className="text-body-28 font-medium">{title}</h3>
         <p className={`text-body-20 ${light ? "text-white" : "text-body"}`}>{body}</p>
       </div>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={icon} alt="" className="size-[60px] object-contain" loading="lazy" />
+      <img
+        src={icon}
+        alt=""
+        className="size-[60px] object-contain transition-transform duration-[350ms] ease-in-out group-hover:-translate-y-1.5 group-hover:scale-105"
+        loading="lazy"
+      />
     </motion.li>
   );
 }
