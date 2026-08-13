@@ -1,0 +1,12 @@
+services:
+  y2labs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: y2labs:latest
+    container_name: y2labs
+    ports:
+      # host:container — the app always listens on 3000 inside the
+      # container (see Dockerfile); only the host side maps to 1001.
+      - "1001:3000"
+    restart: unless-stopped

@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+.env*.local
+next-env.d.ts
+*.tsbuildinfo
+.DS_Store
+
+# Dev-only Figma tooling, renders, and API tokens
+.shots/
+.claude/
+.wb-req

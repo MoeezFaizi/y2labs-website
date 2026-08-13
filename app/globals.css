@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+/* General Sans is loaded via <link> in app/layout.tsx — not @import here,
+   because Tailwind inlines its own import and CSS requires @import to precede
+   all other rules. The <link> also lets us preconnect. */
+
+/* ---------------------------------------------------------------------------
+   Design tokens — mirrored 1:1 from the Y2 LABS Figma variable collection.
+   Names match Figma so a designer can trace any value back to the source.
+   Never hardcode a color in a component; add a token here instead.
+--------------------------------------------------------------------------- */
+@theme {
+  /* Brand */
+  --color-primary: #1d1ca1; /* Figma: Primary */
+  --color-secondary: #d7fd33; /* Figma: Secondary (lime) */
+  --color-light-blue: #1368ff; /* Figma: Light Blue */
+  --color-light-blue-2: #2c32fe; /* Figma: Light Blue 2 — CTA fill */
+  --color-blue: #51d2ff; /* Figma: Blue — glow / accents */
+
+  /* Neutrals */
+  --color-canvas: #f5f5f7; /* Figma: Background Color */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-body: #3c3c49; /* Figma: Text color */
+  --color-grey-100: #e7eaeb;
+  --color-grey-200: #d2d2d2;
+  --color-grey-300: #9ca3af;
+  --color-grey-400: #666666;
+  --color-border: #787789; /* Figma: Border color */
+  --color-border-blue: #2d345f; /* Figma: light blue Border Color */
+
+  /* Dark hero field — sampled from the hero gradient, not in the Figma
+     variable collection (the design uses a raster background there). */
+  --color-night: #050a24;
+  --color-night-2: #0a1550;
+
+  /* Type — General Sans, per the Figma text styles */
+  --font-sans: "General Sans", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+
+  /* Fluid type ramp. Max values match the Figma text styles exactly
+     (H1 70/92, H2 65/80, H3 60/70, H4 50/60, H5 40/50, H6 30/40); the min
+     values are the responsive floor since the design is desktop-only. */
+  --text-h1: clamp(2.5rem, 4.55vw, 4.375rem);
+  --text-h1--line-height: 1.314;
+  --text-h1--font-weight: 600;
+
+  --text-h2: clamp(2.25rem, 4.23vw, 4.0625rem);
+  --text-h2--line-height: 1.231;
+  --text-h2--font-weight: 500;
+
+  --text-h3: clamp(2rem, 3.9vw, 3.75rem);
+  --text-h3--line-height: 1.167;
+  --text-h3--font-weight: 500;
+
+  --text-h4: clamp(1.75rem, 3.25vw, 3.125rem);
+  --text-h4--line-height: 1.2;
+  --text-h4--font-weight: 500;
+
+  --text-h5: clamp(1.5rem, 2.6vw, 2.5rem);
+  --text-h5--line-height: 1.25;
+  --text-h5--font-weight: 500;
+
+  --text-h6: clamp(1.25rem, 1.95vw, 1.875rem);
+  --text-h6--line-height: 1.333;
+  --text-h6--font-weight: 500;
+
+  /* Body ramp — Figma "Body Text" styles */
+  --text-body-34: clamp(1.5rem, 2.2vw, 2.125rem);
+  --text-body-34--line-height: 1.294;
+  --text-body-28: clamp(1.375rem, 1.8vw, 1.75rem);
+  --text-body-28--line-height: 1.357;
+  --text-body-24: clamp(1.25rem, 1.56vw, 1.5rem);
+  --text-body-24--line-height: 1.417;
+  --text-body-22: clamp(1.125rem, 1.43vw, 1.375rem);
+  --text-body-22--line-height: 1.455;
+  --text-body-20: clamp(1.0625rem, 1.3vw, 1.25rem);
+  --text-body-20--line-height: 1.5;
+  --text-body-18: clamp(1rem, 1.17vw, 1.125rem);
+  --text-body-18--line-height: 1.556;
+  --text-body-16: 1rem;
+  --text-body-16--line-height: 1.625;
+
+  /* Figma "Upper case" — 16/26 Medium, 4% tracking */
+  --text-eyebrow: 1rem;
+  --text-eyebrow--line-height: 1.625;
+  --text-eyebrow--letter-spacing: 0.04em;
+  --text-eyebrow--font-weight: 500;
+
+  /* Layout — the design is a 1920 frame with 285px gutters (1350px content) */
+  --container-content: 87.375rem;
+  --spacing-gutter: 1.5rem;
+  --spacing-section: clamp(4.5rem, 9vw, 7.5rem);
+
+  /* Motion — mirrors lib/motion.ts so CSS and JS animations agree */
+  --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* --------------------------------------------------------------------------- */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    /* Tailwind v4 no longer resets border color globally. */
+    border-color: var(--color-grey-100);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Stops scroll-linked animations jittering when a scrollbar appears. */
+    scrollbar-gutter: stable;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Parallax and marquee overflow must never create a horizontal scrollbar. */
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-secondary);
+    color: var(--color-black);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-light-blue-2);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-black);
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Content column used by every section. */
+@utility container-content {
+  width: 100%;
+  max-width: var(--container-content);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+/* The hero's dark field: navy base with an off-centre blue glow behind the
+   globe, matching the raster gradient in the Figma frame. */
+@utility hero-field {
+  background-color: var(--color-night);
+  background-image:
+    radial-gradient(
+      60% 70% at 72% 45%,
+      color-mix(in oklab, var(--color-light-blue) 42%, transparent) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      90% 100% at 50% 0%,
+      var(--color-night-2) 0%,
+      var(--color-night) 65%
+    );
+}
+
+/* Landing hero globe — continuous slow turn (40s/rev). */
+@keyframes globe-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.globe-spin {
+  animation: globe-spin 40s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .globe-spin {
+    animation: none;
+  }
+}
