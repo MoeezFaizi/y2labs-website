@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { useRef } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import { difference } from "@/lib/site";
@@ -13,8 +13,22 @@ import { difference } from "@/lib/site";
  * hover at the prototype's 350ms ease-in-out.
  */
 export function Difference() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+  // Figma prototype: the card row auto-scrolls slightly with page scroll
+  // (scroll-linked drift on frame 1045:3572), smoothed with a soft spring.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const drift = useSpring(useTransform(scrollYProgress, [0, 1], [0, -220]), {
+    stiffness: 90,
+    damping: 30,
+    mass: 0.6,
+  });
+  const x = reduced ? 0 : drift;
   return (
-    <section className="overflow-hidden bg-white pt-[clamp(4.5rem,9vw,7.5rem)] pb-[clamp(4.5rem,9vw,7.5rem)]">
+    <section ref={sectionRef} className="overflow-hidden bg-white pt-[clamp(4.5rem,9vw,7.5rem)] pb-[clamp(4.5rem,9vw,7.5rem)]">
       <div className="container-content">
         <div className="grid gap-8 lg:grid-cols-[300px_950px] lg:gap-[100px]">
           <Reveal preset="fadeUp">
@@ -29,10 +43,17 @@ export function Difference() {
       {/* Desktop: the off-canvas row scrolls horizontally, exactly like the
           Figma frame (1045:3572, overflowDirection: HORIZONTAL_SCROLLING) —
           hidden scrollbar, native trackpad/wheel + pointer drag. */}
-      <ScrollRow className="mt-[clamp(3rem,6vw,5rem)] hidden gap-5 pl-[max(1.5rem,calc((100vw-84.375rem)/2+1.5rem))] pr-6 lg:flex">
-        {difference.items.map((item, i) => (
-          <DifferenceCard key={item.title} {...item} index={i} />
-        ))}
+      <ScrollRow className="mt-[clamp(3rem,6vw,5rem)] hidden lg:block">
+        {/* Scroll-linked auto drift (Figma prototype) layered over the
+            frame's native HORIZONTAL_SCROLLING drag/wheel behaviour. */}
+        <motion.div
+          style={{ x }}
+          className="flex gap-5 pl-[max(1.5rem,calc((100vw-84.375rem)/2+1.5rem))] pr-6"
+        >
+          {difference.items.map((item, i) => (
+            <DifferenceCard key={item.title} {...item} index={i} />
+          ))}
+        </motion.div>
       </ScrollRow>
 
       {/* Below lg: swipe carousel. */}
