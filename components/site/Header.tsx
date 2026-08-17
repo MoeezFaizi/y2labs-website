@@ -30,17 +30,17 @@ export function Header() {
       transition={{ duration: 0.7, ease: ease.expoOut, delay: 0.1 }}
     >
       <div
-        className="w-full px-gutter transition-all duration-500 ease-[var(--ease-expo-out)] xl:px-[240px]"
+        className="w-full px-gutter transition-all duration-500 ease-[var(--ease-expo-out)] xl:px-[max(1.5rem,calc((100vw-1350px)/2))]"
         style={{ paddingBlock: scrolled ? 10 : 20 }}
       >
-        <div className="mx-auto flex w-full max-w-[1350px] items-center justify-between gap-6 rounded-[60px] bg-white/90 px-5 py-3 backdrop-blur-[10px] md:px-[30px] md:py-[20px]">
+        <div className="relative mx-auto flex w-full max-w-[1350px] items-center justify-between gap-6 rounded-[60px] bg-white/90 px-5 py-3 backdrop-blur-[10px] md:px-[30px] md:py-[20px]">
           {/* Logo — the actual Figma wordmark (blue Y2 + black LABS). */}
           <Link href="/" aria-label="Y2 Labs — home" className="shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo.svg" alt="Y2 LABS" width={146} height={40} className="h-8 w-auto md:h-10" />
           </Link>
 
-          <nav className="hidden items-center gap-[30px] xl:flex" aria-label="Main">
+          <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-4 xl:flex 2xl:gap-[30px]" aria-label="Main">
             {nav.map((item) => (
               <Link
                 key={item.label}
@@ -58,7 +58,10 @@ export function Header() {
             {/* Wrapper owns the responsive hiding — the Button base class is
                 `inline-flex`, which would override `hidden` on the button. */}
             <div className="hidden sm:block">
-              <Button href="/contact">Book discovery call</Button>
+              <Button href="/contact" trailing={
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src="/icons/video.svg" alt="" aria-hidden className="size-5" />
+              }>Book discovery call</Button>
             </div>
 
             <button

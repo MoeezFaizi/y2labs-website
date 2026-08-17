@@ -334,7 +334,7 @@ export const whoWeServe = {
 export const testimonials = [
   {
     quote:
-      "Ministries, agencies, and public bodies undergoing digital transformation. We understand procurement constraints, data sovereignty requirements.",
+      "       Ministries, agencies, and public bodies undergoing digital transformation. We understand procurement constraints, data sovereignty requirements.",
     name: "Sarah Johnson",
     role: "Product Manager, TechNova",
     avatar: "/testimonials/sarah-johnson.png",

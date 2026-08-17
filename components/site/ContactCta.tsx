@@ -58,9 +58,11 @@ export function ContactCta({ variant = "form" }: { variant?: "form" | "image" })
             onBlurCapture={() => setPaused(false)}
           >
             <div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/cta/quote.svg" alt="" aria-hidden className="h-[50px] w-auto" />
-              <div className="relative mt-4 min-h-[280px] sm:min-h-[320px]">
+              {/* Figma: the quote mark floats at the text block's top-left
+                  (icon y = text y - 10); the quote's leading spaces clear it. */}
+              <div className="relative min-h-[280px] sm:min-h-[320px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/cta/quote.svg" alt="" aria-hidden className="absolute -top-[6px] left-0 h-9 w-auto sm:-top-[10px] sm:h-[50px]" />
                 <AnimatePresence mode="wait">
                   <motion.blockquote
                     key={index}
@@ -68,7 +70,7 @@ export function ContactCta({ variant = "form" }: { variant?: "form" | "image" })
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -12 }}
                     transition={{ duration: 0.5, ease: ease.expoOut }}
-                    className="text-h6 font-medium text-white sm:text-[clamp(1.75rem,2.4vw,2.875rem)] sm:leading-[1.304]"
+                    className="whitespace-pre-wrap text-h6 font-medium text-white sm:text-[clamp(1.75rem,2.4vw,2.875rem)] sm:leading-[1.304]"
                   >
                     {active.quote}
                   </motion.blockquote>

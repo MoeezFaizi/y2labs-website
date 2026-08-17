@@ -24,7 +24,7 @@ export function Footer() {
         loading="lazy"
       />
 
-      <div className="container-content relative z-10 pt-[clamp(5rem,16vw,19.5rem)] pb-[clamp(2rem,4vw,2.75rem)]">
+      <div className="container-content relative z-10 pt-[clamp(5rem,14.65vw,17.875rem)] pb-[clamp(2rem,4vw,2.875rem)]">
         <div className="grid gap-12 lg:grid-cols-[1fr_640px]">
           {/* Wordmark over the burst — lower-left, just above the link rows. */}
           <Reveal preset="fadeIn" className="flex items-start">
@@ -120,7 +120,7 @@ export function Footer() {
             </div>
 
             {/* Bottom bar */}
-            <div className="mt-[clamp(2.5rem,5vw,5rem)] flex flex-col gap-4 sm:h-[30px] sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-[clamp(2.5rem,5.47vw,6.5625rem)] flex flex-col gap-4 sm:h-[30px] sm:flex-row sm:items-center sm:justify-between">
               <p className="text-[16px] leading-[24px] text-[#f5f5f7]">{footer.copyright}</p>
               <ul className="flex flex-wrap gap-5">
                 {footer.legal.map((l) => (
