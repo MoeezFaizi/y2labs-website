@@ -3,7 +3,6 @@ import { PageHero } from "@/components/site/PageHero";
 import {
   AboutApproach,
   AboutDirection,
-  AboutTeam,
   AboutValues,
   AboutWhoWeAre,
   AboutWhyExists,
@@ -35,7 +34,7 @@ export default function AboutPage() {
       <AboutDirection />
       <AboutWhyExists />
       <AboutApproach />
-      <AboutTeam />
+      {/* Team section hidden for now — re-enable by restoring <AboutTeam /> (import from AboutSections). */}
       <ContactCta />
     </>
   );
