@@ -45,7 +45,7 @@ export function Header() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="group relative text-body-18 font-medium text-grey-400 transition-colors hover:text-black"
+                className="group relative shrink-0 whitespace-nowrap text-body-18 font-medium text-grey-400 transition-colors hover:text-black"
               >
                 {item.label}
                 {/* Underline grows from the left on hover. */}
