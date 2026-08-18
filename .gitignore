@@ -10,3 +10,4 @@ next-env.d.ts
 .shots/
 .claude/
 .wb-req
+.next-prod
