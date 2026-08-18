@@ -29,7 +29,7 @@ export default function ContactPage() {
         ptClassName="pt-[clamp(6rem,7vw,8.125rem)]"
         pbClassName="pb-[clamp(3rem,5vw,5.4375rem)]"
         headingClassName="lg:self-start lg:mt-[99px]"
-        art={{ src: "/contact/hero-headset.png", className: "h-[clamp(320px,42vw,811px)]" }}
+        art={{ src: "/contact/hero-headset.png", className: "h-[clamp(320px,42.25vw,811px)]" }}
       />
       <GetInTouch />
       <Faq />

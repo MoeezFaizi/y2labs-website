@@ -173,7 +173,7 @@ export function Faq() {
               key={f.q}
               preset="fadeUp"
               index={Math.min(i, 3)}
-              className="mt-[13px] border-t border-grey-200 pt-[13px] first:mt-0 first:border-t-0 first:pt-0"
+              className="mt-[13px] pt-[13px] shadow-[inset_0_1px_0_0_var(--color-grey-200)] first:mt-0 first:pt-0 first:shadow-none"
             >
               <div>
                 <button
