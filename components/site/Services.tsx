@@ -63,7 +63,9 @@ export function Services() {
             const isOpen = open === i;
             return (
               <Reveal key={item.number} preset="fadeUp" index={i}>
-                <div className="border-b border-grey-300 last:border-grey-200">
+                {/* 1px divider painted as inset shadow so it doesn't add layout
+                    height — keeps each closed row exactly 124px like Figma. */}
+                <div className="shadow-[inset_0_-1px_0_0_var(--color-grey-300)] last:shadow-[inset_0_-1px_0_0_var(--color-grey-200)]">
                   <h3>
                     <button
                       type="button"
