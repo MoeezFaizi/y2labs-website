@@ -21,7 +21,9 @@ export function CountUp({ to, duration = 1.6, className }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
   const count = useMotionValue(0);
-  const rounded = useTransform(count, (v) => Math.round(v));
+  // Keep the target's decimals — 99.9 must count to "99.9", not round to "100".
+  const decimals = (String(to).split(".")[1] ?? "").length;
+  const rounded = useTransform(count, (v) => v.toFixed(decimals));
 
   useEffect(() => {
     if (!inView || reduced) return;

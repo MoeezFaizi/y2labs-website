@@ -15,9 +15,9 @@ function splitStat(value: string) {
 }
 
 /** Artwork on the right of each card — the exact renders from the Figma file. */
-const artwork: Record<string, { src: string; width: number; height: number }> = {
-  riam: { src: "/products/riam-flow.png", width: 399, height: 380 },
-  "it-operations": { src: "/products/ai-ops-illustration.png", width: 575, height: 413 },
+const artwork: Record<string, { src: string; width: number; height: number; bodyMaxW: number }> = {
+  riam: { src: "/products/riam-flow.png", width: 399, height: 380, bodyMaxW: 575 },
+  "it-operations": { src: "/products/ai-ops-illustration.png", width: 575, height: 413, bodyMaxW: 645 },
 };
 
 /**
@@ -67,10 +67,13 @@ export function Products() {
                     <span className="block text-body-28 font-medium text-blue">
                       {product.eyebrow}
                     </span>
-                    <span className="mt-5 block text-h5 font-medium text-white">
+                    <span className="mt-5 block max-w-[482px] text-h5 font-medium text-white">
                       {product.title}
                     </span>
-                    <span className="mt-[14px] block max-w-[575px] text-body-24 font-medium text-grey-200">
+                    <span
+                      className="mt-[14px] block text-body-24 font-medium text-grey-200"
+                      style={{ maxWidth: artwork[product.slug].bodyMaxW }}
+                    >
                       {product.body}
                     </span>
 
@@ -103,14 +106,15 @@ export function Products() {
                     </span>
                   </span>
 
-                  {/* Right: the Figma diagram render */}
+                  {/* Right: the Figma diagram render — intrinsic size, centered
+                      exactly as exported (399×380 / 575×413), never stretched. */}
                   <span className="relative flex items-center justify-center transition-transform duration-[350ms] ease-in-out lg:group-hover:scale-[1.02]">
                     <AssetImage
                       src={artwork[product.slug].src}
                       alt=""
                       width={artwork[product.slug].width}
                       height={artwork[product.slug].height}
-                      className="h-auto w-full max-w-[575px] object-contain"
+                      className="h-auto max-w-full object-contain"
                     />
                   </span>
                 </span>
