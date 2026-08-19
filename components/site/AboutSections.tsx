@@ -57,11 +57,31 @@ export function AboutWhoWeAre() {
 /* ------------------------------------------------------------------ */
 
 const values = [
-  { icon: "/about/val-star.svg", label: "Continuous Digital Innovation" },
-  { icon: "/about/val-updates.svg", label: "Trusted Ethical Leadership" },
-  { icon: "/about/val-diamond.svg", label: "Delivering Exceptional Excellence" },
-  { icon: "/about/val-agreement.svg", label: "Power Of Collaboration" },
-  { icon: "/about/val-rocket.svg", label: "Customer First Success" },
+  {
+    icon: "/about/val-star.svg",
+    label: "Continuous Digital Innovation",
+    desc: "We embrace emerging technologies and continuously explore better ways.",
+  },
+  {
+    icon: "/about/val-updates.svg",
+    label: "Trusted Ethical Leadership",
+    desc: "We build lasting relationships through honesty, transparency, and accountability.",
+  },
+  {
+    icon: "/about/val-diamond.svg",
+    label: "Delivering Exceptional Excellence",
+    desc: "We are committed to delivering high-quality solutions with attention to every detail.",
+  },
+  {
+    icon: "/about/val-agreement.svg",
+    label: "Power Of Collaboration",
+    desc: "We work closely with our clients, combining ideas and expertise to achieve shared success.",
+  },
+  {
+    icon: "/about/val-rocket.svg",
+    label: "Customer First Success",
+    desc: "We put our clients at the center of everything we do, delivering solutions that create measurable value and lasting partnerships.",
+  },
 ];
 
 export function AboutValues() {
@@ -86,10 +106,16 @@ export function AboutValues() {
               as="li"
               className="lg:first:rounded-none"
             >
-              <div className="group flex h-full min-h-[220px] flex-col justify-between border border-grey-200 px-[18px] py-[30px] lg:h-[346px] lg:min-h-0 lg:-ml-px lg:first:ml-0">
+              {/* Figma prototype: ON_HOVER → 399:2629, SMART_ANIMATE,
+                  EASE_IN_AND_OUT 350ms. Card → navy #1D1CA1 / border #2D345F,
+                  icon slides up out of the card (30 → -40) and turns white,
+                  label slides 252 → 30 and turns white, description
+                  (always rendered in near-white #E2E2E2) slides 302 → 114. */}
+              <div className="group relative flex h-full min-h-[220px] flex-col justify-between overflow-hidden border border-grey-200 bg-white px-[18px] py-[30px] transition-colors duration-[350ms] ease-in-out hover:border-[#2d345f] hover:bg-primary lg:-ml-px lg:block lg:h-[346px] lg:min-h-0 lg:first:ml-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={v.icon} alt="" aria-hidden className="size-10 transition-transform duration-[350ms] ease-in-out group-hover:-translate-y-1" />
-                <p className="text-body-22 font-medium text-body transition-colors duration-[350ms] ease-in-out group-hover:text-black">{v.label}</p>
+                <img src={v.icon} alt="" aria-hidden className="size-10 transition-[transform,filter] duration-[350ms] ease-in-out group-hover:brightness-0 group-hover:invert lg:absolute lg:left-[18px] lg:top-[30px] lg:group-hover:-translate-y-[70px]" />
+                <p className="text-body-22 font-medium text-body transition-[transform,color] duration-[350ms] ease-in-out group-hover:text-white lg:absolute lg:left-[18px] lg:right-[18px] lg:top-[252px] lg:group-hover:-translate-y-[222px]">{v.label}</p>
+                <p className="hidden text-body-18 font-normal text-[#e2e2e2] lg:absolute lg:left-[18px] lg:right-[18px] lg:top-[302px] lg:block lg:transition-transform lg:duration-[350ms] lg:ease-in-out lg:group-hover:-translate-y-[188px]">{v.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -117,8 +143,9 @@ const direction = [
     artW: 340,
     artH: 340,
     check: "/about/check-mission.svg",
-    bgSwap: "bg-[#1368ff]",
     bg: "bg-primary",
+    motion: "",
+    artMotion: "",
   },
   {
     tag: "Our Vision",
@@ -133,8 +160,11 @@ const direction = [
     artW: 400,
     artH: 185,
     check: "/about/check-vision.svg",
-    bgSwap: "bg-[#1d1ca1]",
     bg: "bg-light-blue",
+    motion:
+      "lg:transition-transform lg:delay-[400ms] lg:duration-1000 lg:ease-[cubic-bezier(0.83,0,0.19,0.99)] lg:group-hover/dir:-translate-y-[462px]",
+    artMotion:
+      "lg:transition-transform lg:delay-[400ms] lg:duration-1000 lg:ease-[cubic-bezier(0.83,0,0.19,0.99)] lg:group-hover/dir:-translate-x-[15px]",
   },
 ];
 
@@ -151,7 +181,11 @@ export function AboutDirection() {
         </p>
       </Reveal>
 
-      <div className="mt-[clamp(3.5rem,7vw,6.25rem)] flex flex-col gap-6 lg:gap-0">
+      {/* Figma prototype: MOUSE_ENTER on the whole block, 400ms delay,
+          1000ms, cubic-bezier(0.83, 0, 0.19, 0.99) — the Vision card
+          slides up 462px (offset 580 → 118) over the Mission card,
+          and its eye art shifts 15px left. No background swap. */}
+      <div className="group/dir mt-[clamp(3.5rem,7vw,6.25rem)] flex flex-col gap-6 lg:gap-0">
         {direction.map((card, i) => (
           <Reveal
             key={card.tag}
@@ -160,14 +194,8 @@ export function AboutDirection() {
             className={i > 0 ? "lg:relative lg:z-10 lg:-mt-5" : ""}
           >
             <article
-              className={`group relative overflow-hidden rounded-[20px] p-8 transition-transform duration-[350ms] ease-in-out md:p-[60px] lg:h-[600px] lg:hover:-translate-y-1 ${card.bg}`}
+              className={`group relative overflow-hidden rounded-[20px] p-8 md:p-[60px] lg:h-[600px] ${card.bg} ${card.motion}`}
             >
-              {/* Hover wash — Figma prototype: MOUSE_ENTER, 400ms delay,
-                  1000ms, custom bezier(0.83, 0, 0.19, 0.99). */}
-              <span
-                aria-hidden
-                className={`pointer-events-none absolute inset-0 translate-y-full transition-transform delay-[400ms] duration-1000 ease-[cubic-bezier(0.83,0,0.19,0.99)] group-hover:translate-y-0 ${card.bgSwap}`}
-              />
               <div className="relative grid h-full items-center gap-12 lg:grid-cols-[701px_520px] lg:gap-[9px]">
                 <div>
                   <p className="text-body-28 font-medium text-blue">{card.tag}</p>
@@ -202,7 +230,7 @@ export function AboutDirection() {
                   aria-hidden
                   width={card.artW}
                   height={card.artH}
-                  className="mx-auto h-auto w-auto max-w-full object-contain"
+                  className={`mx-auto h-auto w-auto max-w-full object-contain ${card.artMotion}`}
                   loading="lazy"
                 />
               </div>
