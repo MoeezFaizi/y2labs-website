@@ -114,8 +114,8 @@ const direction = [
       "Maintain the highest standards of engineering craft",
     ],
     art: "/about/art-radar.png",
-    artW: 520,
-    artH: 400,
+    artW: 340,
+    artH: 340,
     check: "/about/check-mission.svg",
     bgSwap: "bg-[#1368ff]",
     bg: "bg-primary",
@@ -130,8 +130,8 @@ const direction = [
       "Maintain the highest standards of engineering craft",
     ],
     art: "/about/art-eye.png",
-    artW: 499,
-    artH: 413,
+    artW: 400,
+    artH: 185,
     check: "/about/check-vision.svg",
     bgSwap: "bg-[#1d1ca1]",
     bg: "bg-light-blue",
@@ -168,10 +168,10 @@ export function AboutDirection() {
                 aria-hidden
                 className={`pointer-events-none absolute inset-0 translate-y-full transition-transform delay-[400ms] duration-1000 ease-[cubic-bezier(0.83,0,0.19,0.99)] group-hover:translate-y-0 ${card.bgSwap}`}
               />
-              <div className="relative grid h-full items-center gap-12 lg:grid-cols-[701px_1fr] lg:gap-[80px]">
+              <div className="relative grid h-full items-center gap-12 lg:grid-cols-[701px_520px] lg:gap-[9px]">
                 <div>
                   <p className="text-body-28 font-medium text-blue">{card.tag}</p>
-                  <h3 className="mt-5 text-h5 font-medium text-white">
+                  <h3 className="mt-5 text-h5 font-medium text-white [text-wrap:wrap]">
                     {card.title}
                   </h3>
                   <p className="mt-5 text-body-24 font-medium text-grey-200">
@@ -202,7 +202,7 @@ export function AboutDirection() {
                   aria-hidden
                   width={card.artW}
                   height={card.artH}
-                  className="mx-auto h-auto w-full max-w-[520px] object-contain"
+                  className="mx-auto h-auto w-auto max-w-full object-contain"
                   loading="lazy"
                 />
               </div>

@@ -22,11 +22,13 @@ export default function AboutPage() {
         title="Creating Digital Solutions for a Smarter Tomorrow"
         ptClassName="pt-[clamp(8rem,12vw,13.625rem)]"
         pbClassName="pb-[clamp(3rem,5vw,4.375rem)]"
-        headingClassName="lg:self-start lg:mt-[61px]"
+        headingClassName="lg:self-start lg:mt-[61px] lg:max-w-[804px]"
+        colsClassName="lg:grid-cols-[804px_1fr] lg:gap-0"
         art={{
           src: "/about/hero-city.png",
           align: "center",
           className: "h-[clamp(320px,38.5vw,740px)]",
+          containerClassName: "lg:justify-start",
         }}
       />
       <AboutWhoWeAre />

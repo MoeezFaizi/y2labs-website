@@ -18,6 +18,8 @@ type PageHeroProps = {
     /** Vertical alignment inside the hero; "bottom" suits grounded scenes. */
     align?: "center" | "bottom";
     className?: string;
+    /** Extra classes on the art container (e.g. "lg:justify-start" to hug the column edge). */
+    containerClassName?: string;
   };
   /** Product pages: which side of the RIAM / IT-Operations toggle is active. */
   productPill?: "riam" | "it-operations";
@@ -98,7 +100,7 @@ export function PageHero({ title, titleTrailing, ariaLabel, art, productPill, pt
             <motion.div
               className={`relative hidden justify-center self-stretch lg:flex ${
                 art.align === "bottom" ? "items-end" : "items-center"
-              }`}
+              } ${art.containerClassName ?? ""}`}
               initial={{ opacity: 0, scale: 0.94 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.1, delay: 0.25, ease: ease.expoOut }}
