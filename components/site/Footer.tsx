@@ -88,7 +88,7 @@ export function Footer() {
                       <li key={link.label} className="flex h-[30px] items-center">
                         <Link
                           href={link.href}
-                          className="text-body-16 font-medium text-grey-200 transition-colors duration-[350ms] hover:text-white"
+                          className="text-body-16 font-medium text-grey-200 no-underline decoration-light-blue decoration-2 underline-offset-[4px] transition-colors duration-[350ms] ease-in-out hover:text-light-blue hover:underline"
                         >
                           {link.label}
                         </Link>

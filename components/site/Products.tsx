@@ -39,7 +39,11 @@ export function Products() {
           </p>
         </Reveal>
 
-        <div className="mt-[clamp(3rem,6vw,5rem)] flex flex-col gap-6 lg:gap-0">
+        {/* Figma prototype: MOUSE_ENTER on the whole block, 400ms delay,
+            1000ms, cubic-bezier(0.83, 0, 0.19, 0.99) — the second card
+            slides up 500px (offset 580 → 80) over the first, leaving an
+            80px strip of it visible. No background swap, no lift. */}
+        <div className="group/prod mt-[clamp(3rem,6vw,5rem)] flex flex-col gap-6 lg:gap-0">
           {products.items.map((product, i) => (
             <Reveal
               key={product.eyebrow}
@@ -49,18 +53,14 @@ export function Products() {
             >
               <Link
                 href={product.href}
-                className={`group relative block overflow-hidden rounded-[20px] p-8 transition-transform duration-[350ms] ease-in-out md:p-[60px] lg:h-[600px] lg:hover:-translate-y-1 ${
+                className={`group relative block overflow-hidden rounded-[20px] p-8 md:p-[60px] lg:h-[600px] ${
                   product.theme === "blue" ? "bg-light-blue" : "bg-primary"
+                } ${
+                  i > 0
+                    ? "lg:transition-transform lg:delay-[400ms] lg:duration-1000 lg:ease-[cubic-bezier(0.83,0,0.19,0.99)] lg:group-hover/prod:-translate-y-[500px]"
+                    : ""
                 }`}
               >
-                {/* Hover wash — Figma prototype: MOUSE_ENTER, 400ms delay,
-                    1000ms, custom bezier(0.83, 0, 0.19, 0.99). */}
-                <span
-                  aria-hidden
-                  className={`pointer-events-none absolute inset-0 translate-y-full transition-transform delay-[400ms] duration-1000 ease-[cubic-bezier(0.83,0,0.19,0.99)] group-hover:translate-y-0 ${
-                    product.theme === "blue" ? "bg-primary" : "bg-light-blue"
-                  }`}
-                />
                 <span className="relative grid h-full gap-12 lg:grid-cols-[1fr_1fr] lg:gap-[80px]">
                   {/* Left: copy + stats */}
                   <span className="flex flex-col justify-center">
@@ -108,7 +108,7 @@ export function Products() {
 
                   {/* Right: the Figma diagram render — intrinsic size, centered
                       exactly as exported (399×380 / 575×413), never stretched. */}
-                  <span className="relative flex items-center justify-center transition-transform duration-[350ms] ease-in-out lg:group-hover:scale-[1.02]">
+                  <span className="relative flex items-center justify-center">
                     <AssetImage
                       src={artwork[product.slug].src}
                       alt=""
