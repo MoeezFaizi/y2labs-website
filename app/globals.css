@@ -189,7 +189,15 @@
     );
 }
 
-/* Landing hero globe — continuous slow turn (40s/rev). */
+/* Landing hero globe — continuous slow turn (60s/rev). */
+@keyframes globe-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.globe-spin {
+  animation: globe-spin 60s linear infinite;
+}
 @keyframes globe-spin {
   to {
     transform: rotate(360deg);

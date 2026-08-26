@@ -27,7 +27,7 @@ export function ExpertiseStrip() {
 
         {/* Icon ticker — starts after the heading block, runs off-canvas. */}
         <div className="flex h-[80px] flex-1 items-center overflow-hidden sm:pl-[100px]">
-          <Marquee speed={345}>
+          <Marquee speed={200}>
             {expertise.icons.map((src) => (
               <span key={src} className="flex shrink-0 items-center pr-[70px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
