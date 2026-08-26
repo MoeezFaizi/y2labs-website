@@ -2,7 +2,7 @@
 
 export const nav = [
   { label: "Services", href: "/#services" },
-  { label: "Our Product", href: "/products" },
+  { label: "Our Product", href: "/product/riam" },
   { label: "How We Work", href: "/#how-we-work" },
   { label: "Who We Serve", href: "/#who-we-serve" },
   { label: "About", href: "/about" },
@@ -368,7 +368,7 @@ export const footer = {
       links: [
         { label: "Services", href: "/#services" },
         { label: "Who We Serve", href: "/#who-we-serve" },
-        { label: "Our Work", href: "/products" },
+        { label: "Our Work", href: "/product/riam" },
         { label: "How We Work", href: "/#how-we-work" },
       ],
     },
@@ -376,7 +376,7 @@ export const footer = {
       title: "Information",
       links: [
         { label: "About", href: "/about" },
-        { label: "Our Products", href: "/products" },
+        { label: "Our Products", href: "/product/riam" },
         { label: "Contact Us", href: "/contact" },
       ],
     },
