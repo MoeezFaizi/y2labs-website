@@ -1,10 +1,10 @@
 /** Content and navigation for the marketing site, lifted from the Figma copy. */
 
 export const nav = [
-  { label: "Services", href: "#services" },
-  { label: "Our Product", href: "#products" },
-  { label: "How We Work", href: "#how-we-work" },
-  { label: "Who We Serve", href: "#who-we-serve" },
+  { label: "Services", href: "/#services" },
+  { label: "Our Product", href: "/products" },
+  { label: "How We Work", href: "/#how-we-work" },
+  { label: "Who We Serve", href: "/#who-we-serve" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
@@ -16,7 +16,7 @@ export const hero = {
     "Built by senior operators with real-world delivery experience across AI, automation, software, and infrastructure.",
   ],
   primaryCta: { label: "Book discovery call", href: "/contact" },
-  secondaryCta: { label: "Explore Services", href: "#services" },
+  secondaryCta: { label: "Explore Services", href: "/#services" },
   customersLabel: "Our top customers",
   customers: [
     { name: "Logoipsum", src: "/logos/logoipsum.png", width: 188, height: 40 },
@@ -366,17 +366,17 @@ export const footer = {
     {
       title: "Company",
       links: [
-        { label: "Services", href: "#services" },
-        { label: "Who We Serve", href: "#who-we-serve" },
-        { label: "Our Work", href: "#products" },
-        { label: "How We Work", href: "#how-we-work" },
+        { label: "Services", href: "/#services" },
+        { label: "Who We Serve", href: "/#who-we-serve" },
+        { label: "Our Work", href: "/products" },
+        { label: "How We Work", href: "/#how-we-work" },
       ],
     },
     {
       title: "Information",
       links: [
         { label: "About", href: "/about" },
-        { label: "Our Products", href: "#products" },
+        { label: "Our Products", href: "/products" },
         { label: "Contact Us", href: "/contact" },
       ],
     },
